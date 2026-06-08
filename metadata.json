@@ -1,0 +1,6 @@
+{
+  "name": "منصة خبراء الرسم للإدارة والمبيعات",
+  "description": "نظام إداري متكامل لإدارة المشاريع والمبيعات، الربط الإلكتروني مع منصة ألف ياء المحاسبية، إصدار ومتابعة الفواتير وعروض الأسعار، إدارة المناديب، ومسح الفواتير بالذكاء الاصطناعي.",
+  "requestFramePermissions": ["camera", "geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

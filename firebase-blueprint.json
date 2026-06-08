@@ -1,0 +1,398 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "بيانات المستخدم في النظام",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "اسم الموظف" },
+        "email": { "type": "string", "format": "email", "description": "البريد الإلكتروني" },
+        "role": { "type": "string", "enum": ["manager", "supervisor", "employee"], "description": "الدور الوظيفي" },
+        "department": { "type": "string", "description": "القسم" },
+        "baseSalary": { "type": "number", "description": "الراتب الأساسي" },
+        "joinedAt": { "type": "string", "format": "date-time", "description": "تاريخ الانضمام" }
+      },
+      "required": ["name", "email", "role"]
+    },
+    "Transaction": {
+      "title": "Transaction",
+      "description": "سجلات المصروفات والمشتريات والإيرادات",
+      "type": "object",
+      "properties": {
+        "type": { "type": "string", "enum": ["expense", "purchase", "income"], "description": "نوع المعاملة" },
+        "amount": { "type": "number", "description": "المبلغ" },
+        "category": { "type": "string", "description": "التصنيف (إيجار، مواد، رواتب، إلخ)" },
+        "description": { "type": "string", "description": "وصف المعاملة" },
+        "date": { "type": "string", "format": "date-time", "description": "تاريخ المعاملة" },
+        "createdBy": { "type": "string", "description": "معرف المستخدم الذي أنشأ السجل" },
+        "invoiceUrl": { "type": "string", "description": "رابط الفاتورة المرفوعة" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"], "description": "حالة المعاملة" },
+        "projectId": { "type": "string", "description": "ربط المصروف بمشروع معين" }
+      },
+      "required": ["type", "amount", "date", "createdBy"]
+    },
+    "Payroll": {
+      "title": "Payroll",
+      "description": "سجلات الرواتب الشهرية",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "معرف الموظف" },
+        "month": { "type": "string", "description": "الشهر (مثال: 2024-04)" },
+        "amount": { "type": "number", "description": "المبلغ الأساسي" },
+        "bonus": { "type": "number", "description": "الحوافز" },
+        "deductions": { "type": "number", "description": "الخصومات" },
+        "status": { "type": "string", "enum": ["draft", "paid"], "description": "حالة الدفع" }
+      },
+      "required": ["userId", "month", "amount", "status"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "نظام الإشعارات وسجل العمليات",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "عنوان الإشعار" },
+        "message": { "type": "string", "description": "محتوى الإشعار" },
+        "type": { "type": "string", "enum": ["info", "success", "warning", "error"], "description": "نوع الإشعار" },
+        "category": { "type": "string", "enum": ["financial", "employee", "purchase", "system"], "description": "تصنيف العملية" },
+        "targetRole": { "type": "string", "enum": ["all", "manager", "employee"], "description": "المستهدف بالإشعار" },
+        "priority": { "type": "string", "enum": ["low", "medium", "high", "critical"], "description": "مستوى الأهمية" },
+        "requiresAcknowledge": { "type": "boolean", "description": "هل يتطلب تأكيد استلام؟" },
+        "acknowledgedBy": { "type": "array", "items": { "type": "string" }, "description": "قائمة المعرفات التي أكدت الاستلام" },
+        "timestamp": { "type": "string", "format": "date-time", "description": "وقت العملية" },
+        "createdBy": { "type": "string", "description": "من قام بالعملية" },
+        "read": { "type": "boolean" },
+        "tab": { "type": "string" }
+      },
+      "required": ["title", "message", "type", "timestamp"]
+    },
+    "Project": {
+      "title": "Project",
+      "description": "إدارة مشاريع الأسوار الدعائية والمقاولات",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "اسم المشروع" },
+        "description": { "type": "string", "description": "وصف المشروع" },
+        "budget": { "type": "number", "description": "ميزانية المشروع التقديرية" },
+        "supervisorId": { "type": "string", "description": "معرف المشرف المسؤول" },
+        "status": { "type": "string", "enum": ["active", "completed", "on-hold"], "description": "حالة المشروع" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "تاريخ البدء" },
+        "depositAmount": { "type": "number", "description": "مبلغ العربون الإجمالي" },
+        "locationLink": { "type": "string", "description": "رابط موقع المشروع (Google Maps)" },
+        "photoUrls": { "type": "array", "items": { "type": "string" }, "description": "صور المشروع" },
+        "milestones": { 
+          "type": "array", 
+          "items": { 
+            "type": "object", 
+            "properties": {
+              "title": { "type": "string" },
+              "status": { "type": "string", "enum": ["pending", "in-progress", "completed"] },
+              "date": { "type": "string" }
+            }
+          },
+          "description": "مراحل المشروع"
+        }
+      },
+      "required": ["title", "status", "createdAt"]
+    },
+    "Payment": {
+      "title": "Payment",
+      "description": "دفعات المشروع",
+      "type": "object",
+      "properties": {
+        "projectId": { "type": "string" },
+        "amount": { "type": "number" },
+        "date": { "type": "string", "format": "date" },
+        "description": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "received"] }
+      },
+      "required": ["projectId", "amount", "date", "status"]
+    },
+    "ProjectAssignment": {
+      "title": "ProjectAssignment",
+      "description": "إسناد العمال للمشاريع",
+      "type": "object",
+      "properties": {
+        "projectId": { "type": "string" },
+        "workerId": { "type": "string" },
+        "assignedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["projectId", "workerId", "assignedAt"]
+    },
+    "Subcontractor": {
+      "title": "Subcontractor",
+      "description": "بيانات مقاولي الباطن والشركاء الخارجيين",
+      "type": "object",
+      "properties": {
+        "projectId": { "type": "string", "description": "معرف المشروع المرتبط" },
+        "name": { "type": "string", "description": "اسم شركة المقاولات" },
+        "serviceType": { "type": "string", "description": "نوع الخدمة (جبس، كهرباء، إلخ)" },
+        "contractAmount": { "type": "number", "description": "إجمالي مبلغ العقد" },
+        "paidAmount": { "type": "number", "description": "المبلغ المدفوع حتى الآن" },
+        "contact": { "type": "string", "description": "وسيلة التواصل" },
+        "status": { "type": "string", "enum": ["active", "completed"], "description": "حالة التعاقد" }
+      },
+      "required": ["projectId", "name", "contractAmount"]
+    },
+    "ProjectNote": {
+      "title": "ProjectNote",
+      "description": "سجل المتابعة والتقدم اليومي للمشروع",
+      "type": "object",
+      "properties": {
+        "projectId": { "type": "string", "description": "معرف المشروع" },
+        "content": { "type": "string", "description": "نص الملاحظة أو التقرير الميداني" },
+        "date": { "type": "string", "format": "date-time", "description": "تاريخ الملاحظة" },
+        "createdBy": { "type": "string", "description": "كاتب الملاحظة" },
+        "images": { "type": "array", "items": { "type": "string" }, "description": "صور مرفقة مع الملاحظة" }
+      },
+      "required": ["projectId", "content", "date", "createdBy"]
+    },
+    "Inventory": {
+      "title": "Inventory",
+      "description": "بيانات المخزون والمواد الخام",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "اسم المادة (مثلاً: بنر، فينيل، حبر)" },
+        "category": { "type": "string", "description": "التصنيف" },
+        "quantity": { "type": "number", "description": "الكمية المتوفرة" },
+        "unit": { "type": "string", "description": "الوحدة (متر، لفة، علبة)" },
+        "reorderLevel": { "type": "number", "description": "مستوى إعادة الطلب (تنبيه ذكي)" },
+        "lastUpdated": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "quantity", "unit"]
+    },
+    "InventoryLog": {
+      "title": "InventoryLog",
+      "description": "سجل حركات المخزن",
+      "type": "object",
+      "properties": {
+        "itemId": { "type": "string", "description": "معرف المادة" },
+        "change": { "type": "number", "description": "مقدار التغيير (+ أو -)" },
+        "reason": { "type": "string", "description": "سبب الحركة (شراء، استهلاك في مشروع)" },
+        "projectId": { "type": "string", "description": "المشروع المرتبط (إن وجد)" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "userId": { "type": "string" }
+      },
+      "required": ["itemId", "change", "timestamp"]
+    },
+    "Worker": {
+      "title": "Worker",
+      "description": "بيانات العمالة الفنية واليومية",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "اسم العامل" },
+        "phone": { "type": "string", "description": "رقم الجوال" },
+        "bankAccount": { "type": "string", "description": "الحساب البنكي (اختياري)" },
+        "role": { "type": "string", "description": "التخصص (فني، معلم، عامل، إلخ)" },
+        "dailyRate": { "type": "number", "description": "سعر اليومية المتفق عليه" },
+        "status": { "type": "string", "enum": ["active", "inactive"], "description": "حالة العامل" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "تاريخ التسجيل" }
+      },
+      "required": ["name", "phone", "dailyRate"]
+    },
+    "DailyLog": {
+      "title": "DailyLog",
+      "description": "سجل الحضور واليوميات للعمال",
+      "type": "object",
+      "properties": {
+        "workerId": { "type": "string", "description": "معرف العامل" },
+        "projectId": { "type": "string", "description": "معرف المشروع" },
+        "date": { "type": "string", "format": "date", "description": "تاريخ سريان اليومية" },
+        "amountEarned": { "type": "number", "description": "المبلغ المستحق لهذا اليوم" },
+        "description": { "type": "string", "description": "ملاحظات إضافية" },
+        "createdBy": { "type": "string", "description": "المشرف الذي سجل الحضور" }
+      },
+      "required": ["workerId", "projectId", "date", "amountEarned"]
+    },
+    "WorkerTransaction": {
+      "title": "WorkerTransaction",
+      "description": "الخصميات والمكافآت والدفعات للعمال",
+      "type": "object",
+      "properties": {
+        "workerId": { "type": "string", "description": "معرف العامل" },
+        "projectId": { "type": "string", "description": "معرف المشروع المرتبط" },
+        "type": { "type": "string", "enum": ["payment", "deduction", "bonus"], "description": "نوع الحركة المالية" },
+        "amount": { "type": "number", "description": "المبلغ" },
+        "description": { "type": "string", "description": "سبب الحركة" },
+        "date": { "type": "string", "format": "date-time", "description": "تاريخ الحركة" },
+        "createdBy": { "type": "string", "description": "المسؤول عن الحركة" }
+      },
+      "required": ["workerId", "type", "amount", "date"]
+    },
+    "Attendance": {
+      "title": "Attendance",
+      "description": "سجل الحضور والانصراف للموظفين",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "معرف الموظف" },
+        "date": { "type": "string", "format": "date", "description": "التاريخ" },
+        "checkIn": { "type": "string", "format": "date-time", "description": "وقت الحضور" },
+        "checkOut": { "type": "string", "format": "date-time", "description": "وقت الانصراف" },
+        "status": { "type": "string", "enum": ["present", "absent", "late", "excused"], "description": "حالة الحضور" },
+        "location": { "type": "object", "properties": { "lat": { "type": "number" }, "lng": { "type": "number" } } },
+        "note": { "type": "string", "description": "ملاحظات" }
+      },
+      "required": ["userId", "date", "status"]
+    },
+    "LeaveRequest": {
+      "title": "LeaveRequest",
+      "description": "طلبات الإجازات للموظفين",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "معرف الموظف" },
+        "type": { "type": "string", "enum": ["annual", "sick", "emergency", "unpaid"], "description": "نوع الإجازة" },
+        "startDate": { "type": "string", "format": "date", "description": "تاريخ البدء" },
+        "endDate": { "type": "string", "format": "date", "description": "تاريخ الانتهاء" },
+        "reason": { "type": "string", "description": "سبب الإجازة" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"], "description": "حالة الطلب" },
+        "approvedBy": { "type": "string", "description": "مدير الموارد البشرية الذي وافق" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "تاريخ تقديم الطلب" }
+      },
+      "required": ["userId", "type", "startDate", "endDate", "status"]
+    },
+    "FinancialAdjustment": {
+      "title": "FinancialAdjustment",
+      "description": "الخصميات والمكافآت للموظفين",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "معرف الموظف" },
+        "type": { "type": "string", "enum": ["deduction", "bonus", "advance"], "description": "نوع الحركة" },
+        "amount": { "type": "number", "description": "المبلغ" },
+        "reason": { "type": "string", "description": "السبب أو التبرير" },
+        "date": { "type": "string", "format": "date-time", "description": "تاريخ الحركة" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected", "applied"], "description": "حالة التطبيق" },
+        "createdBy": { "type": "string", "description": "المسؤول المنشئ للحركة" }
+      },
+      "required": ["userId", "type", "amount", "date"]
+    },
+    "Office": {
+      "title": "Office",
+      "description": "بيانات المقارات الرسمية (مكاتب، معارض، مستودعات)",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "اسم المقر" },
+        "type": { "type": "string", "enum": ["office", "gallery", "warehouse"], "description": "نوع المقر" },
+        "latitude": { "type": "number" },
+        "longitude": { "type": "number" },
+        "address": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "type", "latitude", "longitude"]
+    },
+    "SystemSettings": {
+      "title": "SystemSettings",
+      "description": "إعدادات النظام العالمية",
+      "type": "object",
+      "properties": {
+        "companyName": { "type": "string" },
+        "companySub": { "type": "string" },
+        "language": { "type": "string" },
+        "attendanceRadius": { "type": "number" },
+        "allowManualAttendance": { "type": "boolean" },
+        "currency": { "type": "string" },
+        "workingHoursStart": { "type": "string" },
+        "workingHoursEnd": { "type": "string" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      }
+    },
+    "GalleryItem": {
+      "title": "GalleryItem",
+      "description": "سجل المرفقات والوسائط الخام",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "عنوان الصورة أو السجل" },
+        "url": { "type": "string", "description": "رابط الصورة" },
+        "type": { "type": "string", "enum": ["invoice", "project", "worker", "other"], "description": "نوع المرفق" },
+        "status": { "type": "string", "enum": ["raw", "processed", "archived"], "description": "حالة المعالجة" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "metadata": { "type": "object", "description": "بيانات تقنية إضافية (مثل أبعاد الصورة)" }
+      },
+      "required": ["title", "url", "type", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/system/settings": {
+      "schema": "SystemSettings",
+      "description": "الإعدادات العالمية للنظام"
+    },
+    "/gallery/{itemId}": {
+      "schema": "GalleryItem",
+      "description": "سجلات المرفقات والوسائط الخام"
+    },
+    "/offices/{officeId}": {
+      "schema": "Office",
+      "description": "قائمة المقارات المعتمدة"
+    },
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "بيانات المستخدمين"
+    },
+    "/attendance/{attendanceId}": {
+      "schema": "Attendance",
+      "description": "سجلات الحضور والانصراف"
+    },
+    "/leaveRequests/{leaveId}": {
+      "schema": "LeaveRequest",
+      "description": "طلبات الإجازات"
+    },
+    "/financialAdjustments/{adjId}": {
+      "schema": "FinancialAdjustment",
+      "description": "الخصميات والمكافآت للموظفين"
+    },
+    "/activities/{activityId}": {
+      "schema": "Notification",
+      "description": "سجل النشاطات التفصيلي للموظفين"
+    },
+    "/transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "سجلات المالية"
+    },
+    "/payrolls/{payrollId}": {
+      "schema": "Payroll",
+      "description": "سجلات الرواتب"
+    },
+    "/notifications/{notificationId}": {
+      "schema": "Notification",
+      "description": "سجلات الإشعارات والحركة"
+    },
+    "/projects/{projectId}": {
+      "schema": "Project",
+      "description": "بيانات المشاريع"
+    },
+    "/projects/{projectId}/payments/{paymentId}": {
+      "schema": "Payment",
+      "description": "دفعات المشروع"
+    },
+    "/projects/{projectId}/assignments/{assignmentId}": {
+      "schema": "ProjectAssignment",
+      "description": "إسناد العمال للمشاريع"
+    },
+    "/workers/{workerId}": {
+      "schema": "Worker",
+      "description": "قائمة العمال والمقاولين"
+    },
+    "/dailyLogs/{logId}": {
+      "schema": "DailyLog",
+      "description": "سجل يوميات العمال"
+    },
+    "/workerTransactions/{txId}": {
+      "schema": "WorkerTransaction",
+      "description": "الحركات المالية للعمال"
+    },
+    "/subcontractors/{scId}": {
+      "schema": "Subcontractor",
+      "description": "سجلات مقاولي الباطن"
+    },
+    "/projectNotes/{noteId}": {
+      "schema": "ProjectNote",
+      "description": "سجلات متابعة المشاريع"
+    },
+    "/inventory/{itemId}": {
+      "schema": "Inventory",
+      "description": "سجلات المخزون"
+    },
+    "/inventoryLogs/{logId}": {
+      "schema": "InventoryLog",
+      "description": "سجلات حركة المخزون"
+    }
+  }
+}

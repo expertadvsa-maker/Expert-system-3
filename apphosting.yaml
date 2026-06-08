@@ -1,0 +1,10 @@
+# تعريف إصدار الإعدادات
+schemaVersion: v1
+
+# إعدادات التشغيل والبناء
+runConfig:
+  # الأمر الذي يحول الـ 50 صفحة إلى ملفات جاهزة (Vite Build)
+  build: "npm run build"
+  
+  # المجلد الذي سيخرج فيه النظام النهائي (مهم جداً لـ Vite)
+  outputDirectory: "dist"

@@ -1,0 +1,4 @@
+node_modules/
+dist/
+firestore.rules
+baileys_auth_info/

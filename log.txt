@@ -1,0 +1,12 @@
+◇ injected env (0) from .env.local // tip: ◈ secrets for agents [www.dotenvx.com]
+◇ injected env (0) from .env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+🔑 [Aliphia Config] Loaded environment variables: {
+  VITE_ALIPHIA_USERNAME: 'NOT FOUND',
+  VITE_ALIPHIA_API_KEY: 'NOT FOUND',
+  VITE_ALIPHIA_PASSWORD: 'NOT FOUND'
+}
+{"level":30,"time":"2026-06-08T12:03:35.870Z","pid":4245,"hostname":"localhost","class":"baileys","browser":["AI Studio Worker","Chrome","1.0.0"],"helloMsg":{"clientHello":{"ephemeral":"jJ3LIthtxZ3tQGDxpCTCgq/FFI1tNuPFIGQAs2d9LmE="}},"msg":"connected to WA"}
+WebSocket server error: Port 24678 is already in use
+{"level":30,"time":"2026-06-08T12:03:36.110Z","pid":4245,"hostname":"localhost","class":"baileys","node":{"passive":false,"userAgent":{"platform":"WEB","appVersion":{"primary":2,"secondary":3000,"tertiary":1035194821},"mcc":"000","mnc":"000","osVersion":"0.1","device":"Desktop","osBuildNumber":"0.1","releaseChannel":"RELEASE","localeLanguageIso6391":"en","localeCountryIso31661Alpha2":"US"},"webInfo":{"webSubPlatform":"WEB_BROWSER"},"connectType":"WIFI_UNKNOWN","connectReason":"USER_ACTIVATED","devicePairingData":{"eRegid":"AAAAug==","eKeytype":"BQ==","eIdent":"eXIoRIhwoQuxkUzuRPV6r8X/G25R6wDRs5gQIipKSFw=","eSkeyId":"AAAB","eSkeyVal":"Fw3zDsvTTtVV9yQL3RLbEx6HYBw7uIsecCqElPxgKyk=","eSkeySig":"JkGH9pXaJpExwqWvpmj3u5WbV3mIPirPLjucLpRMbICiRjeBJWgPJvy0hrxeRr8dhzTtv16GyJPdqLTGJjIYCQ==","buildHash":"oslHHv+RCp4a5lmJCiiHLQ==","deviceProps":"ChBBSSBTdHVkaW8gV29ya2VyEgYIChAPGAcYASAAKhcYgFAgATAAOAFAAUgBUAFYAWABcAF4AA=="},"pull":false},"msg":"not logged in, attempting registration..."}
+✅ Server running on port 8080
+Received QR from Baileys: https://wa.me/settings/linked_devices#2@0wqTLm3l0vMuhNWLqtJO/H52I5J48yD01huCoM3d6nEvCq2BueaS/D/RIQy1Nc8QMUgy5hp+7UDwohDSPWVFhWPUdwUYL7iOa7A=,xS/Pt4tfBTTLMpyNwgNT9iXfISGRC7VS69xKNXGl9AY=,eXIoRIhwoQuxkUzuRPV6r8X/G25R6wDRs5gQIipKSFw=,bOFM29j+VCMcBv2zLDPjUbMDIlzu7CaOzj8QxZuXfpc=,1

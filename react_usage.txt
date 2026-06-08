@@ -1,0 +1,76 @@
+src/App.tsx:class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { hasError: boolean, error?: null | Error }> {
+src/components/ui/card.tsx:}: React.ComponentProps<"div"> & { size?: "default" | "sm" }) {
+src/components/ui/card.tsx:function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
+src/components/ui/card.tsx:function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
+src/components/ui/card.tsx:function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
+src/components/ui/card.tsx:function CardAction({ className, ...props }: React.ComponentProps<"div">) {
+src/components/ui/card.tsx:function CardContent({ className, ...props }: React.ComponentProps<"div">) {
+src/components/ui/card.tsx:function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
+src/components/ui/dropdown-menu.tsx:}: React.ComponentProps<typeof DropdownMenuContent>) {
+src/components/ui/dropdown-menu.tsx:}: React.ComponentProps<"span">) {
+src/components/ui/chart.tsx:    label?: React.ReactNode
+src/components/ui/chart.tsx:    icon?: React.ComponentType
+src/components/ui/chart.tsx:const ChartContext = React.createContext<ChartContextProps | null>(null)
+src/components/ui/chart.tsx:  const context = React.useContext(ChartContext)
+src/components/ui/chart.tsx:}: React.ComponentProps<"div"> & {
+src/components/ui/chart.tsx:  children: React.ComponentProps<
+src/components/ui/chart.tsx:  const uniqueId = React.useId()
+src/components/ui/chart.tsx:}: React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
+src/components/ui/chart.tsx:  React.ComponentProps<"div"> & {
+src/components/ui/chart.tsx:  const tooltipLabel = React.useMemo(() => {
+src/components/ui/chart.tsx:                            } as React.CSSProperties
+src/components/ui/chart.tsx:}: React.ComponentProps<"div"> & {
+src/components/ui/avatar.tsx:function AvatarBadge({ className, ...props }: React.ComponentProps<"span">) {
+src/components/ui/avatar.tsx:function AvatarGroup({ className, ...props }: React.ComponentProps<"div">) {
+src/components/ui/avatar.tsx:}: React.ComponentProps<"div">) {
+src/components/ui/sonner.tsx:        } as React.CSSProperties
+src/components/ui/select.tsx:}: React.ComponentProps<typeof SelectPrimitive.ScrollUpArrow>) {
+src/components/ui/select.tsx:}: React.ComponentProps<typeof SelectPrimitive.ScrollDownArrow>) {
+src/components/ui/label.tsx:function Label({ className, ...props }: React.ComponentProps<"label">) {
+src/components/ui/dialog.tsx:function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
+src/components/ui/dialog.tsx:}: React.ComponentProps<"div"> & {
+src/components/ui/progress.tsx:const Progress = React.forwardRef<
+src/components/ui/progress.tsx:  React.ElementRef<typeof ProgressPrimitive.Root>,
+src/components/ui/progress.tsx:  React.ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>
+src/components/ui/alert-dialog.tsx:}: React.ComponentProps<"div">) {
+src/components/ui/alert-dialog.tsx:}: React.ComponentProps<"div">) {
+src/components/ui/alert-dialog.tsx:}: React.ComponentProps<"div">) {
+src/components/ui/alert-dialog.tsx:}: React.ComponentProps<typeof AlertDialogPrimitive.Title>) {
+src/components/ui/alert-dialog.tsx:}: React.ComponentProps<typeof AlertDialogPrimitive.Description>) {
+src/components/ui/alert-dialog.tsx:}: React.ComponentProps<typeof Button>) {
+src/components/ui/alert-dialog.tsx:  Pick<React.ComponentProps<typeof Button>, "variant" | "size">) {
+src/components/ui/table.tsx:function Table({ className, ...props }: React.ComponentProps<"table">) {
+src/components/ui/table.tsx:function TableHeader({ className, ...props }: React.ComponentProps<"thead">) {
+src/components/ui/table.tsx:function TableBody({ className, ...props }: React.ComponentProps<"tbody">) {
+src/components/ui/table.tsx:function TableFooter({ className, ...props }: React.ComponentProps<"tfoot">) {
+src/components/ui/table.tsx:function TableRow({ className, ...props }: React.ComponentProps<"tr">) {
+src/components/ui/table.tsx:function TableHead({ className, ...props }: React.ComponentProps<"th">) {
+src/components/ui/table.tsx:function TableCell({ className, ...props }: React.ComponentProps<"td">) {
+src/components/ui/table.tsx:}: React.ComponentProps<"caption">) {
+src/components/ui/input.tsx:function Input({ className, type, ...props }: React.ComponentProps<"input">) {
+src/components/Financials.tsx:  const handleCreate = async (e: React.FormEvent) => {
+src/components/Notifications.tsx:function FilterButton({ active, label, onClick, icon }: { active: boolean, label: string, onClick: () => void, icon: React.ReactNode }) {
+src/components/Purchases.tsx:  const handleAddPurchase = async (e: React.FormEvent) => {
+src/components/Projects.tsx:  const handleAddProject = async (e: React.FormEvent) => {
+src/components/Projects.tsx:  const handleAddWorker = async (e: React.FormEvent) => {
+src/components/SystemSettings.tsx:  const handleAddAccount = async (e: React.FormEvent) => {
+src/components/SystemSettings.tsx:  const handleAddOffice = async (e: React.FormEvent) => {
+src/components/ProjectView.tsx:  const handleAddReceivedPayment = async (e: React.FormEvent) => {
+src/components/ProjectView.tsx:  const handleSubPayment = async (e: React.FormEvent) => {
+src/components/ProjectView.tsx:  const handleAddDailyLog = async (e: React.FormEvent) => {
+src/components/WorkerView.tsx:  const handleAcknowledge = async (notifId?: string | React.MouseEvent) => {
+src/components/WorkerView.tsx:  const handleAddLog = async (e: React.FormEvent) => {
+src/components/WorkerView.tsx:  const handleAddTx = async (e: React.FormEvent) => {
+src/components/Inventory.tsx:  const handleAddItem = async (e: React.FormEvent) => {
+src/components/Employees.tsx:  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
+src/components/Employees.tsx:  const handleAddEmployee = async (e: React.FormEvent) => {
+src/components/Employees.tsx:  const handleEditEmployee = async (e: React.FormEvent) => {
+src/components/SuppliersList.tsx:  const handleAddSupplier = async (e: React.FormEvent) => {
+src/components/Sales.tsx:  const handleAddSale = async (e: React.FormEvent) => {
+src/components/WorkersManagement.tsx:  const handleAddOrUpdateWorker = async (e: React.FormEvent) => {
+src/components/Expenses.tsx:  const handleAddExpense = async (e: React.FormEvent) => {
+src/components/Subcontractors.tsx:  const handleAddPayment = async (e: React.FormEvent) => {
+src/components/Subcontractors.tsx:  const handleAddSubcontractor = async (e: React.FormEvent) => {
+src/components/Subcontractors.tsx:  icon: React.ElementType;
+src/components/WelcomeOverlay.tsx:export const WelcomeOverlay: React.FC<WelcomeOverlayProps> = ({ user, profile, sysSettings, onComplete }) => {
+src/lib/AuthContext.tsx:export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
